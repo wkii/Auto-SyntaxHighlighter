@@ -6,13 +6,15 @@ Requires at least: 2.6
 Tested up to: 3.3
 Stable tag: trunk
 
-Autoload SyntaxHighlighter only requisite js files and display you code.
-
 == Description ==
 
 Auto SyntaxHighlighter is a WordPress Code highlight plugin.
 
 It's used alexgorbatchev SyntaxHighlighter JavaScript package.
+
+Autoload SyntaxHighlighter only requisite js files and display you code.
+
+Github address: https://github.com/wkii/Auto-SyntaxHighlighter
 
 Support languages see: SyntaxHighlighter Brushes.
 
