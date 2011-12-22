@@ -8,168 +8,104 @@
  Author URI: http://www.akii.org
  */
 define('ASH_VERSION', 2.1);
-
+define('ASH_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 class AutoSyntaxHighlighter {
 	private $_shlver = '3.0.83';
 	private $_settings = array();
 	private $_brushes = array();
 	private $_themes = 'default';
 	private $_post_brushes = array();
-	private $_used_burshes = array();
+	private $_html_script = false; // for other SyntaxHighlighter plugins
 
-	function __construct(){
+	public function __construct(){
 
 		// Register brush scripts
-		wp_register_script( 'syntaxhighlighter-core',				plugins_url('auto-syntaxhighlighter/scripts/shCore.js'),			array(),                         $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-applescript',	plugins_url('auto-syntaxhighlighter/scripts/shBrushAppleScript.js'),array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-as3',			plugins_url('auto-syntaxhighlighter/scripts/shBrushAS3.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-bash',			plugins_url('auto-syntaxhighlighter/scripts/shBrushBash.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-coldfusion',	plugins_url('auto-syntaxhighlighter/scripts/shBrushColdFusion.js'),	array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-csharp',		plugins_url('auto-syntaxhighlighter/scripts/shBrushCSharp.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-cpp',			plugins_url('auto-syntaxhighlighter/scripts/shBrushCpp.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-css',			plugins_url('auto-syntaxhighlighter/scripts/shBrushCss.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-delphi',		plugins_url('auto-syntaxhighlighter/scripts/shBrushDelphi.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-diff',			plugins_url('auto-syntaxhighlighter/scripts/shBrushDiff.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-erlang',		plugins_url('auto-syntaxhighlighter/scripts/shBrushErlang.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-groovy',		plugins_url('auto-syntaxhighlighter/scripts/shBrushGroovy.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-jscript',		plugins_url('auto-syntaxhighlighter/scripts/shBrushJScript.js'),	array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-java',			plugins_url('auto-syntaxhighlighter/scripts/shBrushJava.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-javafx',		plugins_url('auto-syntaxhighlighter/scripts/shBrushJavaFX.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-perl',			plugins_url('auto-syntaxhighlighter/scripts/shBrushPerl.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-php',			plugins_url('auto-syntaxhighlighter/scripts/shBrushPhp.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-plain',		plugins_url('auto-syntaxhighlighter/scripts/shBrushPlain.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-powershell',	plugins_url('auto-syntaxhighlighter/scripts/shBrushPowerShell.js'),	array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-python',		plugins_url('auto-syntaxhighlighter/scripts/shBrushPython.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-ruby',			plugins_url('auto-syntaxhighlighter/scripts/shBrushRuby.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-sass',			plugins_url('auto-syntaxhighlighter/scripts/shBrushSass.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-scala',		plugins_url('auto-syntaxhighlighter/scripts/shBrushScala.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-sql',			plugins_url('auto-syntaxhighlighter/scripts/shBrushSql.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-vb',			plugins_url('auto-syntaxhighlighter/scripts/shBrushVb.js'),			array('syntaxhighlighter-core'), $this->_shlver, true );
-		wp_register_script( 'syntaxhighlighter-brush-xml',			plugins_url('auto-syntaxhighlighter/scripts/shBrushXml.js'),		array('syntaxhighlighter-core'), $this->_shlver, true );
+		wp_register_script( 'ash_autoloader',		ASH_PLUGIN_URL.'SyntaxHighlighter/scripts/shAutoloader.js',			array('ash_shcore'),	   $this->_shlver, true );
+		wp_register_script( 'ash_brush_applescript',ASH_PLUGIN_URL.'SyntaxHighlighter/scripts/shBrushAppleScript.js',	array('ash_autoloader'), $this->_shlver, true );
+		wp_register_script( 'ash_brush_xml',		ASH_PLUGIN_URL.'SyntaxHighlighter/scripts/shBrushXml.js',			array('ash_autoloader'), $this->_shlver, true );
+		wp_register_script( 'ash_shcore',			ASH_PLUGIN_URL.'SyntaxHighlighter/scripts/shCore.js',				array('ash_xregexp'),	   $this->_shlver, true );
+		wp_register_script( 'ash_xregexp',			ASH_PLUGIN_URL.'SyntaxHighlighter/scripts/XRegExp.js',				false, $this->_shlver, true );
 
 		// Register theme stylesheets
-		wp_register_style(  'syntaxhighlighter-core',				plugins_url('auto-syntaxhighlighter/styles/shCore.css'),			array(),                         $this->_shlver );
-		wp_register_style(  'syntaxhighlighter-theme-default',		plugins_url('auto-syntaxhighlighter/styles/shThemeDefault.css'),	array('syntaxhighlighter-core'), $this->_shlver );
-		wp_register_style(  'syntaxhighlighter-theme-django',		plugins_url('auto-syntaxhighlighter/styles/shThemeDjango.css'),		array('syntaxhighlighter-core'), $this->_shlver );
-		wp_register_style(  'syntaxhighlighter-theme-eclipse',		plugins_url('auto-syntaxhighlighter/styles/shThemeEclipse.css'),	array('syntaxhighlighter-core'), $this->_shlver );
-		wp_register_style(  'syntaxhighlighter-theme-emacs',		plugins_url('auto-syntaxhighlighter/styles/shThemeEmacs.css'),		array('syntaxhighlighter-core'), $this->_shlver );
-		wp_register_style(  'syntaxhighlighter-theme-fadetogrey',	plugins_url('auto-syntaxhighlighter/styles/shThemeFadeToGrey.css'),	array('syntaxhighlighter-core'), $this->_shlver );
-		wp_register_style(  'syntaxhighlighter-theme-mdultra',		plugins_url('auto-syntaxhighlighter/styles/shThemeMDUltra.css'),	array('syntaxhighlighter-core'), $this->_shlver );
-		wp_register_style(  'syntaxhighlighter-theme-midnight',		plugins_url('auto-syntaxhighlighter/styles/shThemeMidnight.css'),	array('syntaxhighlighter-core'), $this->_shlver );
-		wp_register_style(  'syntaxhighlighter-theme-rdark',		plugins_url('auto-syntaxhighlighter/styles/shThemeRDark.css'),		array('syntaxhighlighter-core'), $this->_shlver );
+		wp_register_style(  'ash_core',				ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shCore.css',				array(),                         $this->_shlver );
+		wp_register_style(  'ash_theme_default',	ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeDefault.css',		array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_django',		ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeDjango.css',		array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_eclipse',	ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeEclipse.css',		array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_emacs',		ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeEmacs.css',			array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_fadetogrey',	ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeFadeToGrey.css',	array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_mdultra',	ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeMDUltra.css',		array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_midnight',	ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeMidnight.css',		array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_rdark',		ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeRDark.css',			array('ash_core'), $this->_shlver );
 
-		$this->_brushes = apply_filters('syntaxhighlighter_brushes',array(
-			'applescript'	=> 'applescript',
-			'as3'           => 'as3',
-			'actionscript3' => 'as3',
-			'bash'          => 'bash',
-			'shell'         => 'bash',
-			'cf'			=> 'coldfusion',
-			'coldfusion'	=> 'coldfusion',
-			'c-sharp'		=> 'csharp',
-			'csharp'		=> 'csharp',
-			'cpp'			=> 'cpp',
-			'c'				=> 'cpp',
-			'css'			=> 'css',
-			'delphi'		=> 'delphi',
-			'pas'			=> 'delphi',
-			'pascal'		=> 'delphi',
-			'diff'			=> 'diff',
-			'patch'			=> 'diff',
-			'erl'			=> 'erlang',
-			'erlang'		=> 'erlang',
-			'groovy'		=> 'groovy',
-			'js'			=> 'jscript',
-			'jscript'		=> 'jscript',
-			'javascript'	=> 'jscript',
-			'java'			=> 'java',
-			'jfx'			=> 'javafx',
-			'javafx'		=> 'javafx',
-			'perl'			=> 'perl',
-			'pl'			=> 'perl',
-			'php'			=> 'php',
-			'plain'			=> 'plain',
-			'text'			=> 'plain',
-			'ps'			=> 'powershell',
-			'powershell'	=> 'powershell',
-			'py'			=> 'python',
-			'python'		=> 'python',
-			'rails'			=> 'ruby',
-			'ror'			=> 'ruby',
-			'ruby'			=> 'ruby',
-			'sass'			=> 'sass',
-			'scss'			=> 'sass',
-			'scala'			=> 'scala',
-			'sql'			=> 'sql',
-			'vb'			=> 'vb',
-			'vbnet'			=> 'vb',
-			'xml'			=> 'xml',
-			'xhtml'			=> 'xml',
-			'xslt'			=> 'xml',
-			'html'			=> 'xml',
+		$this->_brushes = apply_filters('ash_brushes',array(
+			array('applescript', 'shBrushAppleScript.js'),
+			array('actionscript3 as3', 'shBrushAS3.js'),
+			array('bash shell', 'shBrushBash.js'),
+			array('coldfusion cf', 'shBrushColdFusion.js'),
+			array('cpp c', 'shBrushCpp.js'),
+			array('c# c-sharp csharp', 'shBrushCSharp.js'),
+			array('css', 'shBrushCss.js'),
+			array('delphi pascal', 'shBrushDelphi.js'),
+			array('diff patch pas', 'shBrushDiff.js'),
+			array('erl erlang', 'shBrushErlang.js'),
+			array('groovy', 'shBrushGroovy.js'),
+			array('java', 'shBrushJava.js'),
+			array('jfx javafx', 'shBrushJavaFX.js'),
+			array('js jscript javascript', 'shBrushJScript.js'),
+			array('perl pl', 'shBrushPerl.js'),
+			array('php', 'shBrushPhp.js'),
+			array('text plain', 'shBrushPlain.js'),
+			array('py python', 'shBrushPython.js'),
+			array('ruby rails ror rb', 'shBrushRuby.js'),
+			array('scala', 'shBrushScala.js'),
+			array('sql', 'shBrushSql.js'),
+			array('vb vbnet', 'shBrushVb.js'),
+			array('xml xhtml xslt html', 'shBrushXml.js'),
 		));
-
 		add_filter('the_content', array($this, 'getContentLang'));
 		add_action('wp_footer', array($this,'outputScripts'));
 	}
 
-	function getContentLang($content){
-		if (preg_match_all('/<pre[\S|\s]*class=\"brush:[\s]?([\w-]*)(;[\S|\s]*|)\">/isU', $content, $post_lang)){
+	public function getContentLang($content){
+		if (preg_match_all('/<pre[\S|\s]*class=\"brush:[\s]*([\w-]*)(;[\S|\s]*|)\">/isU', $content, $post_lang)){
 			foreach ($post_lang[1] as $k => $v){
 				$v = strtolower($v);
-				if (!in_array($v,$this->_post_brushes)) $this->_post_brushes[]=$v;
+				if (!isset($this->_post_brushes[$v])) $this->_post_brushes[$v]=$v;
+			}
+			// for html-script
+			foreach ($post_lang[2] as $k => $v)
+			{
+				if (!$this->_html_script && strpos($v,'html-script') && preg_match('/html\-script:[\s]?true/i',$v))
+					$this->_html_script = true;
 			}
 		}
 		return $content;
 	}
 
-	function outputScripts(){
-		global $wp_styles;
+	public function outputScripts(){
 		if (empty($this->_post_brushes)) return;
-		$brushes = array();
-		foreach ($this->_post_brushes as $k => $v){
-			$brushes[] = 'syntaxhighlighter-brush-' . $this->_brushes[$v];
-		}
-		$this->_used_burshes = array_unique($brushes);
 		echo "<!-- Auto SyntaxHighlighter -->\n";
-		wp_print_scripts($this->_used_burshes);
+		if (!$this->_html_script)
+			wp_print_scripts('ash_autoloader');
+		else
+			wp_print_scripts('ash_brush_xml');
+		wp_print_styles('ash_theme_'.$this->_themes);
 		?>
 <script type='text/javascript'>
-	(function(){
-		var corecss = document.createElement('link');
-		var themecss = document.createElement('link');
-<?php 
-		if ( !$wp_styles instanceof WP_Styles )
-			$wp_styles = new WP_Styles();
-		$theme = 'syntaxhighlighter-theme-' . $this->_themes;
-		$core_css_url = apply_filters('syntaxhighlighter_corecssurl' , add_query_arg( 'ver', $this->_shlver, $wp_styles->registered['syntaxhighlighter-core']->src ));
-		$theme_css_url = apply_filters('syntaxhighlighter_cssthemeurl', add_query_arg( 'ver', $this->_shlver, $wp_styles->registered[$theme]->src ));
+SyntaxHighlighter.autoloader(
+<?php
+	$brushes_script = '';
+	foreach ($this->_brushes as $k => $v)
+	{
+		$brushes_script .= "\t".'\''.$v[0].'	'.ASH_PLUGIN_URL.'SyntaxHighlighter/scripts/'.$v[1].'\','."\n";
+	}
+	$brushes_script = substr($brushes_script, 0,-2);
+	echo $brushes_script."\n";
 ?>
-		var corecssurl = "<?php echo esc_js( $core_css_url ); ?>";
-		if ( corecss.setAttribute ) {
-				corecss.setAttribute( "rel", "stylesheet" );
-				corecss.setAttribute( "type", "text/css" );
-				corecss.setAttribute( "href", corecssurl );
-		} else {
-				corecss.rel = "stylesheet";
-				corecss.href = corecssurl;
-		}
-		document.getElementsByTagName("head")[0].appendChild(corecss);
-		
-		var themecssurl = "<?php echo esc_js( $theme_css_url) ?>";
-		if ( themecss.setAttribute ) {
-				themecss.setAttribute( "rel", "stylesheet" );
-				themecss.setAttribute( "type", "text/css" );
-				themecss.setAttribute( "href", themecssurl );
-		} else {
-				themecss.rel = "stylesheet";
-				themecss.href = themecssurl;
-		}
-		document.getElementsByTagName("head")[0].appendChild(themecss);
-		})();
-		SyntaxHighlighter.defaults['auto-links'] = false;
-		SyntaxHighlighter.defaults['toolbar'] = false;
-		SyntaxHighlighter.all();
+);
+SyntaxHighlighter.defaults['auto-links'] = false;
+SyntaxHighlighter.defaults['toolbar'] = false;
+SyntaxHighlighter.all();
 </script>
 <!-- /Auto SyntaxHighlighter -->
 <?php
