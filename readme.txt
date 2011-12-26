@@ -91,6 +91,10 @@ Languages Supported:
 
 
 == Changelog ==
+= 2.2 =
+Compression and consolidation SyntaxHighlighter js and css files.
+To reduce the file requests and save network bandwidth.
+
 = 2.1 =
 This is a major upgrade
 
