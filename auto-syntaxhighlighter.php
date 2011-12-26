@@ -20,47 +20,49 @@ class AutoSyntaxHighlighter {
 	public function __construct(){
 
 		// Register brush scripts
-		wp_register_script( 'ash_autoloader',		ASH_PLUGIN_URL.'SyntaxHighlighter/scripts/shAutoloader.js',			array('ash_shcore'),	   $this->_shlver, true );
-		wp_register_script( 'ash_brush_applescript',ASH_PLUGIN_URL.'SyntaxHighlighter/scripts/shBrushAppleScript.js',	array('ash_autoloader'), $this->_shlver, true );
-		wp_register_script( 'ash_brush_xml',		ASH_PLUGIN_URL.'SyntaxHighlighter/scripts/shBrushXml.js',			array('ash_autoloader'), $this->_shlver, true );
-		wp_register_script( 'ash_shcore',			ASH_PLUGIN_URL.'SyntaxHighlighter/scripts/shCore.js',				array('ash_xregexp'),	   $this->_shlver, true );
-		wp_register_script( 'ash_xregexp',			ASH_PLUGIN_URL.'SyntaxHighlighter/scripts/XRegExp.js',				false, $this->_shlver, true );
+		wp_register_script( 'ash_autoloader',		ASH_PLUGIN_URL.'SyntaxHighlighter/build/scripts/core-min.js',			false,				  $this->_shlver, true );
+		wp_register_script( 'ash_brush_xml',		ASH_PLUGIN_URL.'SyntaxHighlighter/build/scripts/shBrushXml-min.js',			array('ash_autoloader'),  $this->_shlver, true );
+//		wp_register_script( 'ash_autoloader',		ASH_PLUGIN_URL.'SyntaxHighlighter/build/scripts/shAutoloader.js',			array('ash_shcore'),	   $this->_shlver, true );
+//		wp_register_script( 'ash_brush_applescript',ASH_PLUGIN_URL.'SyntaxHighlighter/build/scripts/shBrushAppleScript.js',	array('ash_autoloader'), $this->_shlver, true );
+//		wp_register_script( 'ash_brush_xml',		ASH_PLUGIN_URL.'SyntaxHighlighter/build/scripts/shBrushXml.js',			array('ash_autoloader'), $this->_shlver, true );
+//		wp_register_script( 'ash_shcore',			ASH_PLUGIN_URL.'SyntaxHighlighter/build/scripts/shCore.js',				array('ash_xregexp'),	   $this->_shlver, true );
+//		wp_register_script( 'ash_xregexp',			ASH_PLUGIN_URL.'SyntaxHighlighter/build/scripts/XRegExp.js',				false, $this->_shlver, true );
 
 		// Register theme stylesheets
-		wp_register_style(  'ash_core',				ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shCore.css',				array(),                         $this->_shlver );
-		wp_register_style(  'ash_theme_default',	ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeDefault.css',		array('ash_core'), $this->_shlver );
-		wp_register_style(  'ash_theme_django',		ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeDjango.css',		array('ash_core'), $this->_shlver );
-		wp_register_style(  'ash_theme_eclipse',	ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeEclipse.css',		array('ash_core'), $this->_shlver );
-		wp_register_style(  'ash_theme_emacs',		ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeEmacs.css',			array('ash_core'), $this->_shlver );
-		wp_register_style(  'ash_theme_fadetogrey',	ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeFadeToGrey.css',	array('ash_core'), $this->_shlver );
-		wp_register_style(  'ash_theme_mdultra',	ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeMDUltra.css',		array('ash_core'), $this->_shlver );
-		wp_register_style(  'ash_theme_midnight',	ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeMidnight.css',		array('ash_core'), $this->_shlver );
-		wp_register_style(  'ash_theme_rdark',		ASH_PLUGIN_URL.'SyntaxHighlighter/styles/shThemeRDark.css',			array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_core',				ASH_PLUGIN_URL.'SyntaxHighlighter/build/styles/shCore-min.css',				array(),		   $this->_shlver );
+		wp_register_style(  'ash_theme_default',	ASH_PLUGIN_URL.'SyntaxHighlighter/build/styles/shThemeDefault-min.css',		array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_django',		ASH_PLUGIN_URL.'SyntaxHighlighter/build/styles/shThemeDjango-min.css',		array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_eclipse',	ASH_PLUGIN_URL.'SyntaxHighlighter/build/styles/shThemeEclipse-min.css',		array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_emacs',		ASH_PLUGIN_URL.'SyntaxHighlighter/build/styles/shThemeEmacs-min.css',		array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_fadetogrey',	ASH_PLUGIN_URL.'SyntaxHighlighter/build/styles/shThemeFadeToGrey-min.css',	array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_mdultra',	ASH_PLUGIN_URL.'SyntaxHighlighter/build/styles/shThemeMDUltra-min.css',		array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_midnight',	ASH_PLUGIN_URL.'SyntaxHighlighter/build/styles/shThemeMidnight-min.css',	array('ash_core'), $this->_shlver );
+		wp_register_style(  'ash_theme_rdark',		ASH_PLUGIN_URL.'SyntaxHighlighter/build/styles/shThemeRDark-min.css',		array('ash_core'), $this->_shlver );
 
 		$this->_brushes = apply_filters('ash_brushes',array(
-			array('applescript', 'shBrushAppleScript.js'),
-			array('actionscript3 as3', 'shBrushAS3.js'),
-			array('bash shell', 'shBrushBash.js'),
-			array('coldfusion cf', 'shBrushColdFusion.js'),
-			array('cpp c', 'shBrushCpp.js'),
-			array('c# c-sharp csharp', 'shBrushCSharp.js'),
-			array('css', 'shBrushCss.js'),
-			array('delphi pascal', 'shBrushDelphi.js'),
-			array('diff patch pas', 'shBrushDiff.js'),
-			array('erl erlang', 'shBrushErlang.js'),
-			array('groovy', 'shBrushGroovy.js'),
-			array('java', 'shBrushJava.js'),
-			array('jfx javafx', 'shBrushJavaFX.js'),
-			array('js jscript javascript', 'shBrushJScript.js'),
-			array('perl pl', 'shBrushPerl.js'),
-			array('php', 'shBrushPhp.js'),
-			array('text plain', 'shBrushPlain.js'),
-			array('py python', 'shBrushPython.js'),
-			array('ruby rails ror rb', 'shBrushRuby.js'),
-			array('scala', 'shBrushScala.js'),
-			array('sql', 'shBrushSql.js'),
-			array('vb vbnet', 'shBrushVb.js'),
-			array('xml xhtml xslt html', 'shBrushXml.js'),
+			array('applescript', 'shBrushAppleScript-min.js'),
+			array('actionscript3 as3', 'shBrushAS3-min.js'),
+			array('bash shell', 'shBrushBash-min.js'),
+			array('coldfusion cf', 'shBrushColdFusion-min.js'),
+			array('cpp c', 'shBrushCpp-min.js'),
+			array('c# c-sharp csharp', 'shBrushCSharp-min.js'),
+			array('css', 'shBrushCss-min.js'),
+			array('delphi pascal', 'shBrushDelphi-min.js'),
+			array('diff patch pas', 'shBrushDiff-min.js'),
+			array('erl erlang', 'shBrushErlang-min.js'),
+			array('groovy', 'shBrushGroovy-min.js'),
+			array('java', 'shBrushJava-min.js'),
+			array('jfx javafx', 'shBrushJavaFX-min.js'),
+			array('js jscript javascript', 'shBrushJScript-min.js'),
+			array('perl pl', 'shBrushPerl-min.js'),
+			array('php', 'shBrushPhp-min.js'),
+			array('text plain', 'shBrushPlain-min.js'),
+			array('py python', 'shBrushPython-min.js'),
+			array('ruby rails ror rb', 'shBrushRuby-min.js'),
+			array('scala', 'shBrushScala-min.js'),
+			array('sql', 'shBrushSql-min.js'),
+			array('vb vbnet', 'shBrushVb-min.js'),
+			array('xml xhtml xslt html', 'shBrushXml-min.js'),
 		));
 		add_filter('the_content', array($this, 'getContentLang'));
 		add_action('wp_footer', array($this,'outputScripts'));
@@ -97,7 +99,7 @@ SyntaxHighlighter.autoloader(
 	$brushes_script = '';
 	foreach ($this->_brushes as $k => $v)
 	{
-		$brushes_script .= "\t".'\''.$v[0].'	'.ASH_PLUGIN_URL.'SyntaxHighlighter/scripts/'.$v[1].'\','."\n";
+		$brushes_script .= "\t".'\''.$v[0].'	'.ASH_PLUGIN_URL.'SyntaxHighlighter/build/scripts/'.$v[1].'\','."\n";
 	}
 	$brushes_script = substr($brushes_script, 0,-2);
 	echo $brushes_script."\n";
