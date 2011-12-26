@@ -6,6 +6,7 @@ Requires at least: 2.6
 Tested up to: 3.3
 Stable tag: trunk
 
+Auto SyntaxHighlighter is a WordPress Code highlight plugin.
 == Description ==
 
 Auto SyntaxHighlighter is a WordPress Code highlight plugin.

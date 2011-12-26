@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="YUI Compressor" default="minify" basedir="..">
+	<property name="version" value="1.0"/>
+	<!-- 当前目录,build.xml所在的目录 -->
+	<dirname property="buildfile.dir" file="${ant.file}" />
+	<!-- 编译目录 -->
+	<property name="build.dir" location="${basedir}/SyntaxHighlighter/build" />
+	<!-- yuicompressor的地址 -->
+	<property name="yuicompressor.jar" location="${buildfile.dir}/lib/yuicompressor-2.4.8pre.jar" />
+	<!-- 原始目录 -->
+	<property name="src.dir" location="${basedir}/SyntaxHighlighter/src" />
+	<!-- 文件编码 -->
+	<property name="charset" value="utf-8" />
+	<!--bom utf-8-->
+	<property name="bom" value="&#xFEFF;"/>
+	<!-- 清空并创建编译目录 -->
+	<target name="init">
+		<delete dir="${build.dir}" />
+		<mkdir dir="${build.dir}"/>
+		<echo message="Clean and create build dir finished"/>
+		<copy todir="${build.dir}">
+			<fileset dir="${src.dir}" includes="**/*.js,**/*.css"/>
+		</copy>
+		<echo message="Copy src files to build dir finished"/>
+	</target>
+	
+	<!-- 合并可以合并的js文件 -->
+	<target name="merge.js" depends="init">
+		<concat destfile="${build.dir}/scripts/core.js" encoding="${charset}" outputencoding="${charset}">
+			<path path="${build.dir}/scripts/XRegExp.js" />
+			<path path="${build.dir}/scripts/shCore.js" />
+			<path path="${build.dir}/scripts/shAutoloader.js" />
+		</concat>
+		<!-- 删除被合并的js -->
+		<delete dir="${build.dir}/scripts" includes="XRegExp.js,shCore.js,shAutoloader.js" />
+	</target>
+	
+	
+	<!-- Compress JS -->
+	<target name="compress.js" depends="merge.js">
+		<apply executable="java" parallel="false" failonerror="true" dest="${build.dir}">
+			<fileset dir="${build.dir}" includes="**/*.js" excludes="**/*-min.js" />
+			<arg line="-jar" />
+			<arg path="${yuicompressor.jar}" />
+			<arg line="--charset ${charset}" />
+			<srcfile />
+			<arg line="-o" />
+			<mapper type="regexp" from="^(.*)\.(css|js)$" to="\1-min.\2"/>
+			<targetfile />
+		</apply>
+		<delete dir="${build.dir}" includes="**/*.js" excludes="**/*-min.js" />
+		<echo message="Compress scripts finished"/>
+	</target>
+	
+	<!-- 合并可以合并的css文件 -->
+	<target name="merge.styles" depends="init" ></target>
+	<!-- Compress CSS -->
+	<target name="compress.styles" depends="merge.styles">
+		<apply executable="java" parallel="false" failonerror="true" dest="${build.dir}">
+			<fileset dir="${build.dir}" includes="**/*.css" excludes="**/*-min.css" />
+			<arg line="-jar" />
+			<arg path="${yuicompressor.jar}" />
+			<arg line="--charset ${charset}" /> 
+			<srcfile />
+			<arg line="-o" />
+			<mapper type="regexp" from="^(.*)\.(css|js)$" to="\1-min.\2"/>
+			<targetfile />
+		</apply>
+		<delete dir="${build.dir}" includes="**/*.css" excludes="**/*-min.css" />
+		<echo message="Compress styles finished"/>
+	</target>
+	
+	<target name="minify" depends="compress.js,compress.styles" />
+</project>
