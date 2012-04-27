@@ -3,11 +3,11 @@
  Plugin Name: Auto SyntaxHighlighter
  Plugin URI: http://www.akii.org/auto-syntaxhighlighter.html
  Description: Autoload SyntaxHighlighter only requisite js files and display you code. Uses Alex Gorbatchev's SyntaxHighlighter: <a href="http://alexgorbatchev.com/SyntaxHighlighter/manual/brushes/">SyntaxHighlighter Brushes</a>. Full Support for : AppleScript, ActionScript3, Bash/shell, C#, C++, CSS, Delphi, Diff, Groovy, JavaScript, Java, Perl, PHP, Plain Text, Python, Ruby, Sass, Scala, SQL, Visual Basic and XML/HTML...
- Version: 2.3.1
+ Version: 2.3.2
  Author: digihero
  Author URI: http://www.akii.org
  */
-define('ASH_VERSION', 2.3.1);
+define('ASH_VERSION', "2.3.2");
 define('ASH_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 class AutoSyntaxHighlighter {
 	private $_shlver = '3.0.83';
