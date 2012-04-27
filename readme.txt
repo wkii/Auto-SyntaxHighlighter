@@ -1,12 +1,14 @@
 === Auto SyntaxHighlighter ===
+------------------------------
 Contributors: digihero
 Donate link: http://www.akii.org/
 Tags: SyntaxHighlighter, code, sourcecode, syntax, highlighter
 Requires at least: 2.6
-Tested up to: 3.3
+Tested up to: 3.3.2
 Stable tag: trunk
 
-Auto SyntaxHighlighter is a WordPress Code highlight plugin.
+Auto SyntaxHighlighter is a WordPress Code highlight plugin. Use editor botton, in the pop-up window, paste or write your code, oh, very simple.
+
 == Description ==
 
 Auto SyntaxHighlighter is a WordPress Code highlight plugin.
@@ -34,15 +36,15 @@ It's advantages:
 
 
 == Installation ==
+
 = Tips =
-The Ver 1.1 used SyntaxHighlighter 2.1.382. If you need to use copy and print panel, can use this version.
 
 1. Upload the entire `auto-syntaxhighlighter` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 
 == Frequently Asked Questions ==
-* The Ver 1.1 used SyntaxHighlighter 2.1.382. If you need to use copy and print panel, can use this version.
+
 * Use visual editor of "Auto SyntaxHighlighter" button to add your code.
 * In the HTML mode use `<pre></pre>`, such as `<pre class="brush:php">code here</pre>` or `<pre class="brush:js">code here</pre>`.
 
@@ -91,11 +93,18 @@ Languages Supported:
 
 
 == Changelog ==
+
+= 2.3 =
+
+Fix add script Lang: PowerShell,Erlang,ColdFusion. Thanks Mike.
+
 = 2.2 =
+
 Compression and consolidation SyntaxHighlighter js and css files.
 To reduce the file requests and save network bandwidth.
 
 = 2.1 =
+
 This is a major upgrade
 
 * Support wordpress 3.2 + full-screen mode
@@ -104,18 +113,23 @@ This is a major upgrade
 * Farewell php4 compatible
 
 = 2.0 =
+
 Full screen mode support. Apple script support.
 
 = v1.3.2 =
+
 Fix js for delphi bug.
 
 = v1.3.1 =
+
 Fix code input box xml/html language name.
 
 = v1.3 =
+
 Fix css style. Fix IE bug.
 
 = v1.2 =
+
 upgrade SyntaxHighlighter Class library to 3.0.83.
 
 Since the first version back in 2004, SyntaxHighlighter has always used Flash to provide copy to clipboard functionality. At first it was Flash 8, then it was Flash 9 and now 10. It's never been a crowd pleaser and a lot of requests over the years demanded Flash to be removed.
@@ -125,9 +139,11 @@ Well, it's finally happening -- no more Flash. I think I've came up with user in
 If you double click anywhere on the code, the entire code view is replaces with a pre-selected view from which users can copy with a simple Ctrl/Cmd-C. Clicking anywhere else returns the view to the original state. 
 
 = v1.1 =
+
 Enhance regular match.
 
 = v1.0 =
+
 Initial release.
 
 == Upgrade Notice ==

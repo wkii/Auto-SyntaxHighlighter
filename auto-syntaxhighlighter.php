@@ -3,11 +3,11 @@
  Plugin Name: Auto SyntaxHighlighter
  Plugin URI: http://www.akii.org/auto-syntaxhighlighter.html
  Description: Autoload SyntaxHighlighter only requisite js files and display you code. Uses Alex Gorbatchev's SyntaxHighlighter: <a href="http://alexgorbatchev.com/SyntaxHighlighter/manual/brushes/">SyntaxHighlighter Brushes</a>. Full Support for : AppleScript, ActionScript3, Bash/shell, C#, C++, CSS, Delphi, Diff, Groovy, JavaScript, Java, Perl, PHP, Plain Text, Python, Ruby, Sass, Scala, SQL, Visual Basic and XML/HTML...
- Version: 2.2
+ Version: 2.3.1
  Author: digihero
  Author URI: http://www.akii.org
  */
-define('ASH_VERSION', 2.2);
+define('ASH_VERSION', 2.3.1);
 define('ASH_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 class AutoSyntaxHighlighter {
 	private $_shlver = '3.0.83';
@@ -44,21 +44,22 @@ class AutoSyntaxHighlighter {
 			array('actionscript3 as3', 'shBrushAS3-min.js'),
 			array('bash shell', 'shBrushBash-min.js'),
 			array('coldfusion cf', 'shBrushColdFusion-min.js'),
-			array('cpp c', 'shBrushCpp-min.js'),
 			array('c# c-sharp csharp', 'shBrushCSharp-min.js'),
+			array('cpp c', 'shBrushCpp-min.js'),
 			array('css', 'shBrushCss-min.js'),
-			array('delphi pascal', 'shBrushDelphi-min.js'),
-			array('diff patch pas', 'shBrushDiff-min.js'),
+			array('delphi pas pascal', 'shBrushDelphi-min.js'),
+			array('diff patch', 'shBrushDiff-min.js'),
 			array('erl erlang', 'shBrushErlang-min.js'),
 			array('groovy', 'shBrushGroovy-min.js'),
+			array('js jscript javascript', 'shBrushJScript-min.js'),
 			array('java', 'shBrushJava-min.js'),
 			array('jfx javafx', 'shBrushJavaFX-min.js'),
-			array('js jscript javascript', 'shBrushJScript-min.js'),
 			array('perl pl', 'shBrushPerl-min.js'),
 			array('php', 'shBrushPhp-min.js'),
 			array('text plain', 'shBrushPlain-min.js'),
+			array('ps powershell', 'shBrushPowerShell-min.js'),
 			array('py python', 'shBrushPython-min.js'),
-			array('ruby rails ror rb', 'shBrushRuby-min.js'),
+			array('rails ror ruby', 'shBrushRuby-min.js'),
 			array('scala', 'shBrushScala-min.js'),
 			array('sql', 'shBrushSql-min.js'),
 			array('vb vbnet', 'shBrushVb-min.js'),
