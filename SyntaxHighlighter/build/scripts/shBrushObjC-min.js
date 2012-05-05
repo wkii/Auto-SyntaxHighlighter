@@ -165,7 +165,7 @@
 			{ regex: /^ *#.*/gm,										css: 'preprocessor' },
 			{ regex: new RegExp(this.getKeywords(datatypes), 'gm'),		css: 'color1 bold' },
 			{ regex: new RegExp(this.getKeywords(functions), 'gm'),		css: 'functions bold' },
-			{ regex: new RegExp(this.getKeywords(keywords), 'gm'),		css: 'keyword bold' }
+			{ regex: new RegExp(this.getKeywords(keywords), 'gm'),		css: 'keyword bold' },
 			{ regex: new RegExp(this.getKeywords(constants), 'gm'),		css: 'color2 bold' }
 			];
 	};
