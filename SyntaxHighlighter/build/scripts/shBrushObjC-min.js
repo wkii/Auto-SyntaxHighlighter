@@ -155,6 +155,66 @@
 // Insert further constants here
 '';
 
+var classNames = '' +
+// Foundation framework classes
+'NSAffineTransform NSAppleEventDescriptor NSAppleEventManager NSAppleScript ' +
+'NSArchiver NSArray NSAssertionHandler NSAttributedString NSAutoreleasePool ' +
+'NSBlockOperation NSBundle NSCache NSCachedURLResponse NSCalendar NSCharacterSet ' +
+'NSClassDescription NSCloneCommand NSCloseCommand NSCoder NSComparisonPredicate ' +
+'NSCompoundPredicate NSCondition NSConditionLock NSConnection NSCountCommand ' +
+'NSCountedSet NSCreateCommand NSData NSDataDetector NSDate NSDateComponents ' +
+'NSDateFormatter NSDecimalNumber NSDecimalNumberHandler NSDeleteCommand ' +
+'NSDeserializer NSDictionary NSDirectoryEnumerator NSDistantObject ' +
+'NSDistantObjectRequest NSDistributedLock NSDistributedNotificationCenter ' +
+'NSEnumerator NSError NSException NSExistsCommand NSExpression NSFileCoordinator ' +
+'NSFileHandle NSFileManager NSFileWrapper NSFormatter NSGarbageCollector ' +
+'NSGetCommand NSHashTable NSHost NSHTTPCookie NSHTTPCookieStorage ' +
+'NSHTTPURLResponse NSIndexPath NSIndexSet NSIndexSpecifier NSInputStream ' +
+'NSInvocation NSInvocationOperation NSKeyedArchiver NSKeyedUnarchiver ' +
+'NSLinguisticTagger NSLocale NSLock NSLogicalTest NSMachBootstrapServer ' +
+'NSMachPort NSMapTable NSMessagePort NSMessagePortNameServer NSMetadataItem ' +
+'NSMetadataQuery NSMetadataQueryAttributeValueTuple NSMetadataQueryResultGroup ' +
+'NSMethodSignature NSMiddleSpecifier NSMoveCommand NSMutableArray ' +
+'NSMutableAttributedString NSMutableCharacterSet NSMutableData ' +
+'NSMutableDictionary NSMutableIndexSet NSMutableOrderedSet NSMutableSet ' +
+'NSMutableString NSMutableURLRequest NSNameSpecifier NSNetService ' +
+'NSNetServiceBrowser NSNotification NSNotificationCenter NSNotificationQueue ' +
+'NSNull NSNumber NSNumberFormatter NSObject NSOperation NSOperationQueue ' +
+'NSOrderedSet NSOrthography NSOutputStream NSPipe NSPointerArray ' +
+'NSPointerFunctions NSPort NSPortCoder NSPortMessage NSPortNameServer ' +
+'NSPositionalSpecifier NSPredicate NSProcessInfo NSPropertyListSerialization ' +
+'NSPropertySpecifier NSProtocolChecker NSProxy NSQuitCommand NSRandomSpecifier ' +
+'NSRangeSpecifier NSRecursiveLock NSRegularExpression NSRelativeSpecifier ' +
+'NSRunLoop NSScanner NSScriptClassDescription NSScriptCoercionHandler ' +
+'NSScriptCommand NSScriptCommandDescription NSScriptExecutionContext ' +
+'NSScriptObjectSpecifier NSScriptSuiteRegistry NSScriptWhoseTest NSSerializer ' +
+'NSSet NSSetCommand NSSocketPort NSSocketPortNameServer NSSortDescriptor ' +
+'NSSpecifierTest NSSpellServer NSStream NSString NSTask NSTextCheckingResult ' +
+'NSThread NSTimer NSTimeZone NSUbiquitousKeyValueStore NSUnarchiver ' +
+'NSUndoManager NSUniqueIDSpecifier NSURL NSURLAuthenticationChallenge NSURLCache ' +
+'NSURLConnection NSURLCredential NSURLCredentialStorage NSURLDownload ' +
+'NSURLHandle NSURLProtectionSpace NSURLProtocol NSURLRequest NSURLResponse ' +
+'NSUserDefaults NSValue NSValueTransformer NSWhoseSpecifier NSXMLDocument ' +
+'NSXMLDTD NSXMLDTDNode NSXMLElement NSXMLNode NSXMLParser ' +
+// Insert further classes here
+'';
+
+var protocolNames = '' +
+// Foundation framework protocols
+'NSCoding NSComparisonMethods NSConnectionDelegate NSCopying ' +
+'NSDecimalNumberBehaviors NSErrorRecoveryAttempting NSFastEnumeration ' +
+'NSFileManagerDelegate NSFilePresenter NSKeyedArchiverDelegate ' +
+'NSKeyedUnarchiverDelegate NSKeyValueCoding NSKeyValueObserving NSLocking ' +
+'NSMachPortDelegate NSMetadataQueryDelegate NSMutableCopying ' +
+'NSNetServiceBrowserDelegate NSNetServiceDelegate ' +
+'NSObjCTypeSerializationCallBack NSObject NSPortDelegate ' +
+'NSScriptingComparisonMethods NSScriptKeyValueCoding NSScriptObjectSpecifiers ' +
+'NSSpellServerDelegate NSStreamDelegate NSURLAuthenticationChallengeSender ' +
+'NSURLConnectionDelegate NSURLHandleClient NSURLProtocolClient ' +
+'NSXMLParserDelegate ' +
+
+// Insert further protocols here
+'';
 		this.regexList = [
 			{ regex: SyntaxHighlighter.regexLib.singleLineCComments,	css: 'comments' },			// one line comments
 			{ regex: SyntaxHighlighter.regexLib.multiLineCComments,		css: 'comments' },			// multiline comments
@@ -164,7 +224,9 @@
 			{ regex: new RegExp(this.getKeywords(datatypes), 'gm'),		css: 'color1' },
 			{ regex: new RegExp(this.getKeywords(functions), 'gm'),		css: 'functions' },
 			{ regex: new RegExp(this.getKeywords(keywords), 'gm'),		css: 'keyword' },
-			{ regex: new RegExp(this.getKeywords(constants), 'gm'),		css: 'color2' },
+			{ regex: new RegExp(this.getKeywords(constants), 'gm'),		css: 'constants' },
+			{ regex: new RegExp(this.getKeywords(classNames), 'gm'),	css: 'color2' },
+			{ regex: new RegExp(this.getKeywords(protocolNames), 'gm'),	css: 'color3' },
 			{ regex: /\@(?:catch|class|defs|dynamic|encode|end|finally|implementation|interface|optional|package|private|property|protected|protocol|public|required|selector|synchronized|synthesize|throw|try)(?=\b)/gm, css: 'keyword' }
 			];
 	};
