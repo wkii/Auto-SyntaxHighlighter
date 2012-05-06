@@ -35,9 +35,7 @@
 'pascal register restrict return sizeof static struct switch typedef typeof ' +
 'union volatile while ' +
 // Objective-C keywords
-'_cmd __strong __weak @catch @class @defs @dynamic @encode @end @finally ' +
-'@implementation @interface @optional @package @private @property @protected ' +
-'@protocol @public @required @selector @synchronized @synthesize @throw @try ' +
+'_cmd __strong __weak ' +
 'bycopy byref in inout oneway out IBOutlet IBOutletCollection ' +
 'IMP NS_DURING NS_ENDHANDLER NS_HANDLER NS_VALUERETURN NS_VOIDRETURN ' +
 'self super';
@@ -163,10 +161,11 @@
 			{ regex: SyntaxHighlighter.regexLib.doubleQuotedString,		css: 'string' },			// strings
 			{ regex: SyntaxHighlighter.regexLib.singleQuotedString,		css: 'string' },			// strings
 			{ regex: /^ *#.*/gm,										css: 'preprocessor' },
-			{ regex: new RegExp(this.getKeywords(datatypes), 'gm'),		css: 'color1 bold' },
-			{ regex: new RegExp(this.getKeywords(functions), 'gm'),		css: 'functions bold' },
-			{ regex: new RegExp(this.getKeywords(keywords), 'gm'),		css: 'keyword bold' },
-			{ regex: new RegExp(this.getKeywords(constants), 'gm'),		css: 'color2 bold' }
+			{ regex: new RegExp(this.getKeywords(datatypes), 'gm'),		css: 'color1' },
+			{ regex: new RegExp(this.getKeywords(functions), 'gm'),		css: 'functions' },
+			{ regex: new RegExp(this.getKeywords(keywords), 'gm'),		css: 'keyword' },
+			{ regex: new RegExp(this.getKeywords(constants), 'gm'),		css: 'color2' },
+			{ regex: /\@(?:catch|class|defs|dynamic|encode|end|finally|implementation|interface|optional|package|private|property|protected|protocol|public|required|selector|synchronized|synthesize|throw|try)(?=\b)/gm, css: 'keyword' }
 			];
 	};
 
