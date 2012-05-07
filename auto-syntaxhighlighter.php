@@ -54,6 +54,7 @@ class AutoSyntaxHighlighter {
 			array('js jscript javascript', 'shBrushJScript-min.js'),
 			array('java', 'shBrushJava-min.js'),
 			array('jfx javafx', 'shBrushJavaFX-min.js'),
+			array('objective-c objc cocoa', 'shBrushObjC-min.js'),
 			array('perl pl', 'shBrushPerl-min.js'),
 			array('php', 'shBrushPhp-min.js'),
 			array('text plain', 'shBrushPlain-min.js'),
