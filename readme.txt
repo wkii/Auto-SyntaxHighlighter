@@ -71,6 +71,7 @@ Languages Supported:
 * JavaScript	(js, jscript, javascript)
 * Java			(java)
 * JavaFX		(jfx, javafx)
+* objc			Objective-C/Cocoa
 * Perl			(perl, pl)
 * PHP			(php)
 * Plain Text	(plain, text)
@@ -93,6 +94,11 @@ Languages Supported:
 
 
 == Changelog ==
+
+= 2.3.3 =
+
+Add script Lang: Objective-C/Cocoa. Thanks WillerZ.
+Demo: http://blog.nomzit.com/2010/12/29/get-properties-right/
 
 = 2.3 =
 

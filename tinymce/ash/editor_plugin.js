@@ -16,7 +16,7 @@
 			// Register the command so that it can be invoked by using tinyMCE.activeEditor.execCommand('mceExample');
 			ed.addCommand('mceash', function() {
 				ed.windowManager.open({
-					file : url + '/ash_editor.html?ver=2.3',
+					file : url + '/ash_editor.html?ver=2.3.3',
 					width : 720 + parseInt(ed.getLang('ash.editor_width', 0)),
 					height : 580 + parseInt(ed.getLang('ash.editor_height', 0)),
 					inline : 1,
@@ -67,7 +67,7 @@
 				author 	  : 'Akii Snow',
 				authorurl : 'http://www.akii.org',
 				infourl   : 'http://www.akii.org',
-				version   : "2.3"
+				version   : "2.3.3"
 			};
 		}
 	});
