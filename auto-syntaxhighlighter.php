@@ -71,7 +71,7 @@ class AutoSyntaxHighlighter {
 	}
 
 	public function getContentLang($content){
-		if (preg_match_all('/<pre[\S|\s]*class=\"brush:[\s]*([\w-]*)(;[\S|\s]*|)\">/isU', $content, $post_lang)){
+		if (preg_match_all('/<pre.*class=(\"brush:[^\"]*\"|\'brush:[^\']*\')>/isU', $content, $post_lang)){
 			foreach ($post_lang[1] as $k => $v){
 				$v = strtolower($v);
 				if (!isset($this->_post_brushes[$v])) $this->_post_brushes[$v]=$v;
